@@ -49,10 +49,8 @@ def awin(product_url, config, retry_interval):
     if response.status_code == 200:
         return response.json()['url']
     elif response.status_code == 429:
-        print('got a 429. will retry for this url: ', product_url)
         if retry_interval:
             time.sleep(retry_interval)
-            print("waited for ", retry_interval, " seconds. resuming...")
             awin(product_url, config, retry_interval)
 
     return ''

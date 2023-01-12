@@ -45,18 +45,18 @@ def main(config, domain, newonly, retry_interval):
 
     products = get_all(config, domain, newonly)
 
-    # with progress:
-    #     for product in progress.track(products):
-    for product in products:
-        link = get_link(config, product, retry_interval)
-        if link:
-            if update_row(config, product[0], link):
-                updated = updated + 1
+    with progress:
+        for product in progress.track(products):
+    #for product in products:
+            link = get_link(config, product, retry_interval)
+            if link:
+                if update_row(config, product[0], link):
+                    updated = updated + 1
+                else:
+                    failed = failed + 1
             else:
                 failed = failed + 1
-        else:
-            failed = failed + 1
-        processed = processed + 1
+            processed = processed + 1
 
     logger(f'Updated: {updated}')
     logger(f'Failed: {failed}')
