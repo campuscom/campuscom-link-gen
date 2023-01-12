@@ -1,0 +1,70 @@
+{
+    "database": {
+        "host": "127.0.0.1",
+        "port": 3306,
+        "user": "root",
+        "password": "r123r123",
+        "database": "test",
+        "use_unicode": true
+    },
+
+    "tracking_url_providers": {
+        "www.edx.org": {
+            "provider_name": "awin",
+            "username": "chris.morgan@jenzabar.com",
+            "password": "[Gratuity65Polish]",
+
+            "advertiser_id": 6798,
+            "publisher_id": "1152955",
+            "token": "690fe44e-61d9-4878-9c31-3f769da1423a"
+        },
+
+        "www.skillshare.com": {
+            "provider_name": "impact",
+            "username": "Chr1sMorgan",
+            "password": "[Matter098Wacky]",
+
+            "account_sid": "IRhyG35dVjWd3656242ndunJPymKhPjQr1",
+            "program_id": "4650",
+            "auth_token": "GNeRWGYud~LyuCGg4SYsCSRgwbm~XNR7"
+        },
+
+        "www.coursera.org": {
+            "provider_name": "impact",
+            "username": "chr1sm0rgan",
+            "password": "<Pencil508Fallout>",
+
+            "account_sid": "IRP8i8ttB8uK3656263Dsoo24nJk6oUSV1",
+            "program_id": "14726",
+            "auth_token": "LF5.kSutMk.jKsjQESkkZSfakYVM5ahP"
+        },
+
+        "www.datacamp.com": {
+            "provider_name": "impact",
+            "username": "chr1sm0rgan2",
+            "password": "[Matter098Wacky]",
+
+            "account_sid": "IRM89AnMC6323656302qAjaoqumY2Lvjq1",
+            "program_id": "13294",
+            "auth_token": "EmXEfzg~fXch7ChNh3Bbky-AoNjYBhsA"
+        },
+
+        "www.udemy.com": {
+            "provider_name": "rakuten",
+            "username": "chris.morgan@jenzabar.com",
+            "password": "<Platitude78Forceps>",
+
+            "advertiser_id": 39197,
+            "token": "rfu8PndwaZe9mQ4LfdNbSk1I0hLxDRxq"
+        },
+
+        "futurelearn": {
+            "provider_name": "skimlinks",
+            "username": "chris.morgan@jenzabar.com",
+            "password": "[Model78Power]",
+
+            "publisher_id": "",
+            "sref": "https://campus4i.com/"
+        }
+    }
+}
