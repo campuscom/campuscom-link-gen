@@ -83,7 +83,7 @@ def rakuten(product_url, config, retry_interval):
 
 
 def skimlinks(product_url, config, retry_interval):
-    url = f"https://go.skimresources.com/?id={{config['publisher_id']}}&url={{product_url}}&sref={{config['sref']}}"
+    url = f"https://go.skimresources.com/?id={config['publisher_id']}&url={product_url}&sref={config['sref']}"
     return url
 
 
