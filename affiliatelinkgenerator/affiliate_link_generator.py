@@ -3,6 +3,7 @@ from urllib.parse import urlparse
 import requests
 import json
 import time
+from logger import logger
 
 
 def impact(product_url, config, retry_interval):
@@ -24,8 +25,10 @@ def impact(product_url, config, retry_interval):
 
     if response.status_code == 200:
         return response.json()['TrackingURL']
+    else:
+        logger(f'Error getting response. Skipping: {response.text}')
 
-    return ''
+    return None
 
 
 def awin(product_url, config, retry_interval):
@@ -52,8 +55,10 @@ def awin(product_url, config, retry_interval):
         if retry_interval:
             time.sleep(retry_interval)
             awin(product_url, config, retry_interval)
+    else:
+        logger(f'Error getting response. Skipping: {response.text}')
 
-    return ''
+    return None
 
 
 def rakuten(product_url, config, retry_interval):
@@ -77,9 +82,8 @@ def rakuten(product_url, config, retry_interval):
     if response.status_code == 200:
         return response.json()['advertiser']['deep_link']['deep_link_url']
     else:
-        print(response.text)
-        sys.exit()
-    return ''
+        logger(f'Error getting response. Skipping: {response.text}')
+    return None
 
 
 def skimlinks(product_url, config, retry_interval):
@@ -92,7 +96,8 @@ def get_provider(config, hostname):
         providers = config['tracking_url_providers']
         provider = providers[hostname]
     except KeyError:
-        print('no providers configered')
+        logger(f'Provider not configured for {hostname}. Skipping.')
+        return None
 
     return provider
 
@@ -100,5 +105,7 @@ def get_provider(config, hostname):
 def get_link(config, product, retry_interval):
     o = urlparse(product[1])
     provider = get_provider(config, o.hostname)
-    generator = eval(provider['provider_name'])
-    return generator(product[1], provider, retry_interval)
+    if provider:
+        generator = eval(provider['provider_name'])
+        return generator(product[1], provider, retry_interval)
+    return None

@@ -36,34 +36,24 @@ def main(config, domain, newonly, retry_interval):
             try:
                 config = json.loads(f.read())
             except json.JSONDecodeError as e:
+                logger('Malformed JSON file. Could not read data.')
                 logger(e, level=40)
                 terminate()
-
-    processed = 0
-    failed = 0
-    updated = 0
+    else:
+        logger('Config file not found. Exiting.', level=40)
+        terminate()
 
     products = get_all(config, domain, newonly)
 
     with progress:
         for product in progress.track(products):
-    #for product in products:
+#    for product in products:
             link = get_link(config, product, retry_interval)
             if link:
-                if update_row(config, product[0], link):
-                    updated = updated + 1
-                else:
-                    failed = failed + 1
+                update_row(config, product[0], link)
             else:
-                failed = failed + 1
-            processed = processed + 1
-
-    logger(f'Updated: {updated}')
-    logger(f'Failed: {failed}')
-    logger(f'Number of records processed: {processed}')
-    logger('\n')
+                logger(f'Could not create affiliate link: {product[1]}')
 
 
 if __name__ == '__main__':
-    logger('#################### SUMMARY ####################')
     main()
